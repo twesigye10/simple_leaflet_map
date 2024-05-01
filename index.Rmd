@@ -1,0 +1,37 @@
+---
+title: ""
+author: "Anthony"
+date: "01 May 2024"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+## Simple Leaflet Map
+
+A simple leaflet map to demonstrate the ease of using leaflet with R
+
+> Date created: **01 May 2024**
+
+### create data and load library
+
+```{r}
+library(leaflet)
+
+df_data <- data.frame(lat = runif(50, min = 0.243,max = 0.447), 
+                      lng = runif(50, min = 32.492 ,max = 32.680))
+  
+```
+
+### Map of random points around Kampala
+
+```{r}
+df_data %>% 
+  leaflet() %>% 
+  addTiles() %>%
+  addMarkers(popup = ~paste(paste('<b>', 'Lat:', '</b>', round(lat, 3)), 
+                            paste('<b>',  'Lon:', '</b>', round(lng, 3)), sep = '<br/>'), 
+             clusterOptions = markerClusterOptions())
+```
